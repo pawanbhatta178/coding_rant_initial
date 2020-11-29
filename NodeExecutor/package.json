@@ -1,0 +1,19 @@
+{
+  "name": "nodeexecutor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "setDevEnv": "OUTPUT_LOG=output.txt USER_CODE=userCode.js CORRECT_ANSWERS=correctAnswer.json TEST_RESULT=testResult.json PERFORMANCE=performance.txt",
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "mocha": "^8.2.1"
+  }
+}

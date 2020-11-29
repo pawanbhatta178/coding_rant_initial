@@ -1,0 +1,35 @@
+{
+  "name": "codingrant",
+  "version": "1.0.0",
+  "description": "Back end service for Coding Rant platform",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "dev": "nodemon dist/index.js",
+    "dev2": "nodemon --exec ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "start2": "ts-node src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^14.14.9",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "@mikro-orm/cli": "^4.3.0",
+    "@mikro-orm/core": "^4.3.0",
+    "@mikro-orm/migrations": "^4.3.0",
+    "@mikro-orm/postgresql": "^4.3.0",
+    "passport-facebook": "^3.0.0",
+    "pg": "^8.5.1"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./src/mikro-orm.config.ts",
+      "./dist/mikro-orm.config.js"
+    ]
+  }
+}

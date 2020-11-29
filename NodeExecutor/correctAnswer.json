@@ -1,0 +1,4 @@
+[
+    {"id":"test1","input":"[4,2,5,null,null,null,6]","expectedOutput":true},
+    {"id":"test2","input":"[4,7,8]","expectedOutput":false}
+    ]
