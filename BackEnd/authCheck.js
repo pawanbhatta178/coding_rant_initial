@@ -1,3 +1,4 @@
+
 const authCheck=(req,res,next)=>{
     if(!req.user){
         if(req.method==="GET"){
