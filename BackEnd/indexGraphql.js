@@ -1,6 +1,5 @@
 const express =require('express');
 const  { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require('graphql');
  const bodyParser = require('body-parser');
 const persistToFile=require('./persistToFile');
 const app=express();
@@ -17,6 +16,8 @@ const pool=require('./config/database');
 const helmetConfig=require('./helmetConfig');
 const PORT=4000; 
 
+const schema=require("./schema/codeSchema");
+const { json } = require('body-parser');
 
 //all the middlewares in use
 app.use(helmet(helmetConfig));
@@ -24,7 +25,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieSession({
   maxAge:24*60*60*1000,//a day
-  keys:[session.cookieKey]
+  keys:[session.cookieKey]//this key encrypts cookie and therefore becomes a signed cookie
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -48,31 +49,40 @@ app.get('/',(req,res)=>{
 
 //graphql starts here. GRAPHQL allows for much easier and manged API than restful API
 //therefore, all post request will be directed at graphql endpoints
-const schema = buildSchema(`
-  type Query {
-    currentUser: User
-  }
-  type User{
-      id:String
-      displayName:String
-      name:String
-      country:String
-  }
-`);
+
  
 
 
 const root = {
-  currentUser: function (args, request) {
-      if(request.user) return request.user;
-      else return;
-  }
+  hello:(args,request)=>{
+  return args.name
+  }, 
+  submit:  async (args, request) =>{
+  const {test,perf, err, cons}=await persistToFile(args.input.code, args.input.lang);
+     return {
+         id:"asdasdsad",
+         code:args.input.code,
+         lang:args.input.lang,
+         performance:perf,
+         error:err,
+         console:cons,
+         result:test
+     }
+  },
+   compile:(args,request)=>{
+    return {
+        id:"asdasdsad",
+        code:args.input.code,
+        lang:args.input.lang,
+        console:args.input.cons
+    }
+   }
 };
 
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: root,
+  rootValue: root,//This will point at jS Object that has all the resolvers in it
   graphiql: !process.env.NODE_ENV,//process.env.NODE_ENV will have value when in production
 }));
 

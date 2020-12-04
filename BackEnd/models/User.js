@@ -1,6 +1,7 @@
-const pool=require('../config/database');
-const callDatabase=require('./callDatabase');
+const {callDatabase}=require('./callDatabase');
 const {v4}=require('uuid');
+
+
 const getUserIdFromOauthId=async (oauthId)=>{
 const query = {
         text: 'SELECT "id" from "Users" where "oauthId"=$1 ',
