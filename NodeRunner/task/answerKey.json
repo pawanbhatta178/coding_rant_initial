@@ -1,0 +1,4 @@
+[
+    {"id":"test1","input":["asas","asas"],"expectedOutput":["sasa","sasa"]},
+    {"id":"test2","input":["peeps","sasaas"],"expectedOutput":["speep","saasas"]}
+    ]

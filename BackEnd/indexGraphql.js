@@ -15,10 +15,9 @@ const authCheck=require('./authCheck');
 const pool=require('./config/database');
 const helmetConfig=require('./helmetConfig');
 const PORT=4000; 
-
 const schema=require("./schema/codeSchema");
 const { json } = require('body-parser');
-
+const {getChallengeById, getHintsById,addChallenge, addChallengeAndHints}=require("./models/Challenge")
 //all the middlewares in use
 app.use(helmet(helmetConfig));
 app.use(cors());
@@ -50,8 +49,6 @@ app.get('/',(req,res)=>{
 //graphql starts here. GRAPHQL allows for much easier and manged API than restful API
 //therefore, all post request will be directed at graphql endpoints
 
- 
-
 
 const root = {
   hello:(args,request)=>{
@@ -76,7 +73,35 @@ const root = {
         lang:args.input.lang,
         console:args.input.cons
     }
-   }
+  },
+  challenge: async (args, request) => {
+    const challengeObj = await getChallengeById(args.id);
+    return challengeObj;
+  },
+  hint: async(args, request, parent) => {
+    const hintArray = await getHintsById(args.id);
+    return hintArray;
+  },
+  addChallenge: async (args, request) => {
+    const z = await addChallenge(args.input);
+    console.log(z);
+    return true
+  },
+  addChallengeAndHints: async(args, request) => {
+    const a = await addChallengeAndHints(args.input);
+    console.log(a);
+    return true;
+  },
+  getChallengeAndHints: async (args, request) => {
+    const challenge=await getChallengeById(args.id);
+    const hints = await getHintsById(args.id);
+    console.log(challenge);
+    console.log(hints);
+    return {
+      ...challenge,
+      hints:[...hints]
+    }
+  }
 };
 
 

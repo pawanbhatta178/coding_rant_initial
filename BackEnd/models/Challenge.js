@@ -14,7 +14,7 @@ const getChallengeById=async (id)=>{
 
 const getHintsById = async (id) => {
     const query = {
-        text: 'SELECT * from "Hints" where "challenge"=$1 ',
+        text: 'SELECT * from "Hints" where "challengeId"=$1 ',
         values: [id],
     }
     const {rows}=await callDatabase(query);
@@ -23,6 +23,7 @@ const getHintsById = async (id) => {
     }     
     return rows;
 }
+
 
 const addChallenge=async ({title,questionPrompt,sampleInput,sampleOutput,difficulty})=>{
     const query = {
