@@ -1,6 +1,5 @@
 const express =require('express');
 const bodyParser = require('body-parser');
-const persistToFile=require('./persistToFile');
 const app=express();
 const cors = require('cors');
 const helmet = require("helmet");
@@ -12,6 +11,7 @@ const cookieSession=require('cookie-session');
 const {session}=require('./config/keys');
 const authCheck=require('./authCheck');
 const pool=require('./config/database');
+const runCodeInIsolation = require('./runCodeInIsolation');
 const port=4000; 
 app.use(helmet());
 app.use(cors());
@@ -40,15 +40,14 @@ app.get('/',(req,res)=>{
 
 //middleware that does authentication business goes here
 
-app.post('/compile',authCheck,async (req, res) => {
+app.post('/compile',async (req, res) => {
     console.log('Got body:', req.body);
     //sanitize the received data
-    if(!req.body.source || req.body.lang!=="js"){
+    if(!req.body.code || req.body.lang!=="js"){
         return res.status(400).send("Cannot process this request");
     }
-    let data=await persistToFile(req.body.source,req.body.lang);
-    res.send({data});
-
+    let data = await runCodeInIsolation({ code:req.body.code, lang:req.body.lang });
+    res.send(data);
 });
 
 app.listen(process.env.PORT|| port,()=>{

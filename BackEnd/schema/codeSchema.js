@@ -28,8 +28,7 @@ type SubmissionResponse{
 type CompileResponse{
 code:String!
 lang:Lang!
-error:String
-console:String
+testResult:String
 }
 
 

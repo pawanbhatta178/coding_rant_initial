@@ -1,8 +1,0 @@
-[
-    {"id":"test1","input":[1,2,3],"expectedOutput":6},
-    {"id":"test2","input":[1,1,1],"expectedOutput":3},
-        {"id":"test2","input":["a","b","c"],"expectedOutput":"abc"},
-            {"id":"test2","input":["a",1,1],"expectedOutput":"a11"}
-
-
-    ]

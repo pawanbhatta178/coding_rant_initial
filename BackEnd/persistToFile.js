@@ -24,7 +24,7 @@ const persistToFile=async (source, extension)=>{
         timeout:1000
     }
     try{
-    const {stdout,stderr}=await exec(`docker run --rm -v "$(pwd)"/codeToCompile/${targetFolder}:/usr/src/app/task   15296aa85711 timeout 2 bash script.sh`,exec_options);
+    const {stdout,stderr}=await exec(`docker run --rm -v "$(pwd)"/codeToCompile/${targetFolder}:/usr/src/app/task   655539e594a9   timeout 2 sh ./script.sh`,exec_options);
     }
     catch(error){
       return returnVal={
@@ -33,16 +33,9 @@ const persistToFile=async (source, extension)=>{
     }
 
     try{
-    const testResult= fs.readFile(`./codeToCompile/${targetFolder}/result.json`,'utf8');
-    const performance=fs.readFile(`./codeToCompile/${targetFolder}/performance.txt`,'utf-8');
-    const error=fs.readFile(`./codeToCompile/${targetFolder}/error.txt`,'utf-8');
-    const console=fs.readFile(`./codeToCompile/${targetFolder}/console.txt`,'utf-8');
-    const [test,perf,err,cons]=await Promise.all([testResult,performance,error,console]);
+    const output=await fs.readFile(`./codeToCompile/${targetFolder}/testOutput.json`,'utf-8');
     returnVal={
-        test,
-        perf,
-        err,
-        cons
+        output
     }
     return returnVal;
     }

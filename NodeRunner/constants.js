@@ -1,2 +1,2 @@
-const TASKPATH = "./task2";
+const TASKPATH = "./task";
 module.exports = { TASKPATH };

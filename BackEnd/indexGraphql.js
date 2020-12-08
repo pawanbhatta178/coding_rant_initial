@@ -17,7 +17,8 @@ const helmetConfig=require('./helmetConfig');
 const PORT=4000; 
 const schema=require("./schema/codeSchema");
 const { json } = require('body-parser');
-const {getChallengeById, getHintsById,addChallenge, addChallengeAndHints}=require("./models/Challenge")
+const {getChallengeById, getHintsById,addChallenge, addChallengeAndHints}=require("./models/Challenge");
+const runCodeInIsolation = require('./runCodeInIsolation');
 //all the middlewares in use
 app.use(helmet(helmetConfig));
 app.use(cors());
@@ -66,12 +67,15 @@ const root = {
          result:test
      }
   },
-   compile:(args,request)=>{
+  compile: async (args, request) => {
+    console.log(args.input.code,args.input.lang)
+    const testResult = await runCodeInIsolation(args.input);
+    console.log(testResult);
     return {
         id:"asdasdsad",
         code:args.input.code,
         lang:args.input.lang,
-        console:args.input.cons
+        testResult: testResult
     }
   },
   challenge: async (args, request) => {

@@ -1,4 +1,3 @@
-const answerKey = require("./task2/answerKey.json");
 const fs = require('fs');
 const {promisify}= require("util");
 const readFile = promisify(fs.readFile);
@@ -13,7 +12,7 @@ const main = async () => {
             return;
         }
         try {
-            const tests = await readFile(`./${TASKPATH}/answerKey.json`, 'utf-8');
+            const tests = await readFile(`${TASKPATH}/answerKey.json`, 'utf-8');
             const testArray = JSON.parse(tests);
             const runTest = require("./runTest");
             const testResultArray= testArray.map(test => {
@@ -30,9 +29,7 @@ const main = async () => {
         result['syntaxError1'] = err;
     }
     finally {
-        console.log(JSON.stringify(result));//write to output file
-        console.log((result));//write to output file
-
+        writeFile(`${TASKPATH}/testOutput.json`, JSON.stringify(result));
     }
    
 };

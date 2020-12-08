@@ -1,1 +1,1 @@
-console.log(100+10)
+// write your code here
