@@ -1,1 +1,1 @@
-{"functionNotProvidedError":"Entry function is not exported"}
+{"testResults":[{"id":"test1","input":"asas","expectedOutput":"sasa","returnVal":"sasa","timeTaken":0.28849999606609344,"passed":true},{"id":"test2","input":"peeps","expectedOutput":"speep","returnVal":"speep","timeTaken":0.010999992489814758,"passed":true}]}
