@@ -1,9 +1,14 @@
-function reverseString(str) {
-  var newString = "";
-    for (var i = str.length - 1; i >= 0; i--) {
-        newString += str[i];
-    }
-    return newString;
-}
 
-module.exports=reverseString;
+    function myFunction(params){
+    /*
+
+    Write your code here...
+    Call as many helper function as you wish. 
+    Note: We currently only support JavaScript
+
+    Happy Coding!
+    */
+    }
+    module.exports=yourFunction;     //make sure that the main function is exported. Feel free to change the function name. 
+
+    

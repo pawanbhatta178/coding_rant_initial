@@ -1,7 +1,10 @@
 const pool=require('../config/database');
 
 
-const callDatabase=async (query)=>{
+const callDatabase = async (query) => {
+    if (!query) {
+        return null;
+    }
 try{
 let response=await pool.query(query);
 return response;

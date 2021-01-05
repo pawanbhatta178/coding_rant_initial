@@ -1,4 +1,1 @@
-[
-    {"id":"test1","input":"asas","expectedOutput":"sasa"},
-    {"id":"test2","input":"peeps","expectedOutput":"speep"}
-    ]
+[{"id":1,"input":6,"expectedOutput":8},{"id":2,"input":9,"expectedOutput":34},{"id":3,"input":10,"expectedOutput":55}]
